@@ -27,6 +27,9 @@ if __name__ == "__main__":
     a = a*a
     b = b*(b-1)
 
+    cuda.memcpy_htod(a_gpu, a)
+    cuda.memcpy_htod(b_gpu, b)
+
     func = mod.get_function("sum2arrays")
     func(a_gpu, b_gpu, c_gpu, np.uint32(N), block=(16,1,1), grid=(int((N-1)/4+1),1,1))
 
