@@ -9,7 +9,7 @@ __global__ void Multy2Matrix(int m, int n, int k, float* A, float* B, float* C)
   if ((Row < n) && (Col < k)) {
     float Cvalue = 0.0;
     for (int i = 0; i < m; ++i)  Cvalue += A[Row*n+i] * B[Col+i*m];
-    C[Row*k+Col] = Cvalue;
+    C[Row+Col*k] = Cvalue;
   }
 }
 
@@ -23,8 +23,8 @@ int main(void)
   float *h_a, *h_b, *h_c;
 
   const int N = 2;
-  const int M = 5;
-  const int K = 30;
+  const int M = 2;
+  const int K = 2;
 
   size_t size_a = N * M * sizeof(float);
   size_t size_b = M * K * sizeof(float);
