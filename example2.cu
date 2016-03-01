@@ -53,7 +53,7 @@ int main(void)
 
   // el numero de threads por bloque debe ser menor que 1024
   // en mi caso
-  // threads x threads >= 1024
+  // threads x threads x 1 >= 1024
   const int threads = 20; //20 x 20 = 400
 
   dim3 DimGrid((N-1)/threads + 1, (K-1)/threads + 1, 1);

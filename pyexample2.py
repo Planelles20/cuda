@@ -49,7 +49,11 @@ if __name__ == "__main__":
     cuda.memcpy_htod(b_gpu, b)
 
     func = mod.get_function("Multy2Matrix")
-    threads = max(N,K) 
+
+    # el numero de threads por bloque debe ser menor que 1024
+    # en mi caso
+    # threads x threads x 1  >= 1024
+    threads = 32
     func(np.uint32(M),  np.uint32(N),  np.uint32(K), a_gpu, b_gpu, c_gpu,
         block=(threads,threads,1), grid=(int((N-1)/threads+1),int((K-1)/threads+1),1))
 
